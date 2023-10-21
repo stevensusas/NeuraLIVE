@@ -1,28 +1,32 @@
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-import flask
+# Import necessary modules
+from flask import Flask, render_template, request, redirect, send_from_directory
 import os
 from werkzeug.utils import secure_filename
 import zipfile
 import cv2
-import numpy as np
 import glob
 import matplotlib.pyplot as plt
 from werkzeug.utils import secure_filename
 from cell_count import count_cells
 
-app = Flask(__name)
+# Create a Flask app
+app = Flask(__name__)
 
+# Set the upload folder
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 ALLOWED_EXTENSIONS = {'zip'}
 
+# Function to check allowed file extensions
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+# Home route to render the home page
 @app.route('/')
 def home():
     return render_template('home.html')
 
+# Upload route to handle the file upload and processing
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'zip_file' not in request.files:
@@ -63,7 +67,13 @@ def upload():
         plt.savefig(graph_filename)
         plt.close()
 
-        return render_template('results.html', graph='/' + graph_filename)
+        return render_template('results.html', graph='/uploads/' + graph_filename)
 
+# Route to serve static files (e.g., images)
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory('static', filename)
+
+# Run the app
 if __name__ == '__main':
     app.run(debug=True)
