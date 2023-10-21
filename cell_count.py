@@ -49,8 +49,8 @@ for image_file in sorted_image_files:
 # Create a scatter plot
 plt.scatter(range(1, len(sorted_image_files) + 1), results, marker='o', s=30, c='b', label='Data Points')
 plt.xlabel('Image Order')
-plt.ylabel('Number of Cells (Based on Shape)')
-plt.title('Cell Growth (Based on Cell Shape)')
+plt.ylabel('Number of Cells ')
+plt.title('Cell Count ')
 plt.grid(True)
 plt.legend()
 plt.show()
