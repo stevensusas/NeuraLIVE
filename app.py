@@ -55,12 +55,8 @@ def show_results():
     folder_name = os.path.splitext(uploaded_zip_filename)[0]
     folder_path = os.path.join('extracted_files/', folder_name)
     
-    
     generate_plot ()
     
-    
-
-  
     return render_template('results.html')
 
 @app.route('/uploads/<filename>')
