@@ -1,13 +1,18 @@
 import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
+
 img = cv.imread('SHSY5Y_Phase_B10_1_00d04h00m_2.tif')
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-ret, thresh = cv.threshold(gray, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU)
+gray = cv.GaussianBlur(gray, (5, 5), 0)
+_, thresh = cv.threshold(gray, 130, 255, cv.THRESH_BINARY)
+cv.imshow('Grayscaled image', thresh)
 
-contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+# Create a copy of the thresholded image to draw contours on
+contour_img = thresh.copy()
 
-i=0
+contours, _ = cv.findContours(thresh, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+
 circle = 0
 ellipse = 0
 
@@ -17,25 +22,23 @@ for contour in contours:
     approx = cv.approxPolyDP(contour, epsilon, True)
 
     # Calculate the aspect ratio
-    x, y, w, h = cv.boundingRect(contour)
-    aspect_ratio = float(w) / h
+    x, y, _, _ = cv.boundingRect(contour)
     
-    # Check aspect ratio to distinguish between circle and ellipse
-    if aspect_ratio >= 0.95 and aspect_ratio <= 1.05:
-        shape = "Circle"
-        circle += 1
-    else:
-        shape = "Ellipse"
+    if (len(approx) < 6 and len(approx) > 4):
+        shape = 'Ellipse'
         ellipse += 1
-
-    # Draw the contour and label the shape
-    cv.drawContours(img, [contour], 0, (0, 0, 255), 2)
-    cv.putText(img, shape, (x, y - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+        cv.drawContours(img, [contour], 0, (0, 0, 255), 2)
+        cv.putText(img, shape, (x, y - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 200), 2)
+    elif len(approx) > 6:
+        shape = 'Circle'
+        circle += 1
+        cv.drawContours(img, [contour], 0, (0, 255, 0), 2)
+        cv.putText(img, shape, (x, y - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 200, 0), 2)
 
 print(circle, "circles")
 print(ellipse, "ellipses")
+
 # Display the result
-# plt.imshow(thresh, cmap='Greys')
 plt.imshow(cv.cvtColor(img, cv.COLOR_BGR2RGB))
 plt.axis('off')
 plt.show()
