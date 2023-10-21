@@ -24,19 +24,19 @@ for contour in contours:
     # Calculate the aspect ratio
     x, y, _, _ = cv.boundingRect(contour)
     
-    if (len(approx) < 6 and len(approx) > 4):
+    if (len(approx) < 6 and len(approx) > 3):
         shape = 'Ellipse'
         ellipse += 1
         cv.drawContours(img, [contour], 0, (0, 0, 255), 2)
         cv.putText(img, shape, (x, y - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 200), 2)
-    elif len(approx) > 6:
+    elif len(approx) > 5:
         shape = 'Circle'
         circle += 1
         cv.drawContours(img, [contour], 0, (0, 255, 0), 2)
         cv.putText(img, shape, (x, y - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 200, 0), 2)
 
-print(circle, "circles")
-print(ellipse, "ellipses")
+print(int(circle/3), "circles")
+print(int(ellipse/3), "ellipses")
 
 # Display the result
 plt.imshow(cv.cvtColor(img, cv.COLOR_BGR2RGB))
