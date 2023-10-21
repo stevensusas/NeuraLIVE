@@ -54,7 +54,6 @@ def upload():
             num_cells = count_cells(image)
             results.append(num_cells)
 
-        # Create a scatter plot
         plt.scatter(range(1, len(image_files) + 1), results, marker='o', s=30, c='b', label='Data Points')
         plt.xlabel('Image Order')
         plt.ylabel('Number of Cells')
@@ -67,7 +66,7 @@ def upload():
         plt.savefig(graph_filename)
         plt.close()
 
-        return render_template('results.html', graph='/uploads/' + graph_filename)
+        return send_from_directory(app.config['UPLOAD_FOLDER'], 'cell_count.png')
 
 # Route to serve static files (e.g., images)
 @app.route('/uploads/<filename>')
