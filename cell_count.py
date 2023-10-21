@@ -29,28 +29,3 @@ def count_cells(image):
 
     return cell_count
 
-# Process the images
-image_files = glob.glob('/Users/gmacheta/Desktop/untitled folder/SHSY5Y Rep 1/*.tif')
-results = []
-
-# Extract image numbers from filenames
-image_numbers = [int(image_file.split('_')[1].split('.')[0]) for image_file in image_files]
-
-# Sort the image files based on the image number
-sorted_image_files = [x for _, x in sorted(zip(image_numbers, image_files))]
-
-for image_file in sorted_image_files:
-    image = cv2.imread(image_file, cv2.IMREAD_COLOR)
-
-    num_cells = count_cells(image)
-
-    results.append(num_cells)
-
-# Create a scatter plot
-plt.scatter(range(1, len(sorted_image_files) + 1), results, marker='o', s=30, c='b', label='Data Points')
-plt.xlabel('Image Order')
-plt.ylabel('Number of Cells ')
-plt.title('Cell Count ')
-plt.grid(True)
-plt.legend()
-plt.show()
