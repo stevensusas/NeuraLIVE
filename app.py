@@ -6,6 +6,7 @@ from tempfile import TemporaryDirectory
 import matplotlib.pyplot as plt
 from cell_count import generate_plot
 from cell_health import generate_graphs  # Import your generate_plot function here
+from count_branch import generate_branch_plot
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Add a secret key for session
@@ -59,12 +60,14 @@ def upload():
 
 @app.route('/results')
 def show_results():
-        
+        print(1)
 
         generate_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','cell_count_1')
         generate_plot('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','cell_count_2')
         generate_graphs('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','1')
         generate_graphs('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','2')
+        #generate_branch_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','branch_count_1')
+        #generate_branch_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 2','branch_count_2')
        
         # Create a unique graph filename
        
