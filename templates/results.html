@@ -1,55 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Results</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 100px); /* Adjust the height as needed */
-        }
-        .header {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 100%;
-        }
-        .header h1 {
-            color: #007BFF;
-        }
-        .results {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 100%;
-        }
-        .results img {
-            max-width: 50%; /* Each image takes 50% of the container width */
-        }
-    </style>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+    .header {
+        background-color: #333; /* Dark background color for the header */
+        padding: 20px;
+    }
+    .logo {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/static/Background.jpeg');
+        background-size: cover;
+        z-index: -1; /* Place the background image behind other content */
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 170vh;
+    }
+    .header-bar {
+        background-color: #007BFF; /* Background color for the team name bar */
+        color: white;
+        font-size: 18px;
+        padding: 10px;
+        text-align: center;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
+    }
+    .results {
+        display: flex;
+        color: white;
+        justify-content: space-between; /* Place the columns at both ends */
+        padding: 10px; /* Add some padding to the columns */
+        overflow-x: scroll; /* Enable horizontal scrolling if content overflows */
+    }
+    .column {
+        background-color: #f3f3f3; /* Background color for each graph rectangle */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: calc(50% - 20px); /* Quarter of the screen minus padding */
+        margin: 0 10px; /* Add spacing between columns */
+        text-align: center;
+    }
+    .column img {
+        max-width: 100%; /* Ensure images fit within their columns */
+        margin: 10px 0; /* Add spacing between images */
+    }
+    .results-label {
+        background-color: #007BFF; /* Background color for the "Results" label */
+        color: white;
+        font-size: 18px;
+        padding: 10px;
+        border-radius: 10px 10px 0 0; /* Rounded corners on top */
+        width: 100%;
+    }
+</style>
 </head>
 <body>
+    
+   
+    <div class="background-image"></div>
     <div class="container">
-        <div class="header">
-            <h1>Results</h1>
-        </div>
+       
         <div class="results">
-            <img src="{{ url_for('static', filename='cell_count_1.png') }}" alt="Cell Count Graph 1">
-            <img src="{{ url_for('static', filename='cell_count_2.png') }}" alt="Cell Count Graph 2">
+            <div class="column">
+                <div class="results-label">Test Sample</div>
+                <img src="{{ url_for('static', filename='cell_count_1.png') }}" alt="Cell Count Graph 1">
+                <img src="{{ url_for('static', filename='1rate.png') }}" alt="Rate Graph 1">
+                <img src="{{ url_for('static', filename='1types.png') }}" alt="Type Graph 1">
+            </div>
+            <div class="column">
+                <div class="results-label">Control Sample</div>
+                <img src="{{ url_for('static', filename='cell_count_2.png') }}" alt="Cell Count Graph 2">
+                <img src="{{ url_for('static', filename='2rate.png') }}" alt="Rate Graph 2">
+                <img src="{{ url_for('static', filename='2types.png') }}" alt="Type Graph 2">
+            </div>
         </div>
     </div>
 </body>

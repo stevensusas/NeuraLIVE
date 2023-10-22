@@ -34,12 +34,12 @@ def count_cells(image):
     return cell_count
 
 def generate_plot (imagespath,imagename):
-    print (imagespath)
+    
     image_files = glob.glob(os.path.join(imagespath,'*.tif'))
     results = []
     
     # Extract image numbers from filenames
-    image_numbers = [int(image_file.split('/')[-1].split('_')[1].split('.')[0]) for image_file in image_files]
+    image_numbers = [int(''.join(filter(lambda x: x in '0123456789', image_file.split('_')[7]))) for image_file in image_files]
     
     # Sort the image files based on the image number
     sorted_image_files = [x for _, x in sorted(zip(image_numbers, image_files))]

@@ -4,7 +4,8 @@ import os
 from werkzeug.utils import secure_filename
 from tempfile import TemporaryDirectory
 import matplotlib.pyplot as plt
-from cell_count import generate_plot  # Import your generate_plot function here
+from cell_count import generate_plot
+from cell_health import generate_graphs  # Import your generate_plot function here
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Add a secret key for session
@@ -58,14 +59,15 @@ def upload():
 
 @app.route('/results')
 def show_results():
-   
+        
 
-        generate_plot('/Users/gmacheta/Documents/GitHub/cellCS/extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','cell_count_1')
-
-        generate_plot('/Users/gmacheta/Documents/GitHub/cellCS/extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','cell_count_2')
+        generate_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','cell_count_1')
+        generate_plot('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','cell_count_2')
+        generate_graphs('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','1')
+        generate_graphs('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','2')
+       
         # Create a unique graph filename
        
-        
         return render_template('results.html')
 
 @app.route('/uploads/<filename>')
