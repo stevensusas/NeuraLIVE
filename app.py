@@ -66,8 +66,6 @@ def show_results():
         generate_plot('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','cell_count_2')
         generate_graphs('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','1')
         generate_graphs('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','2')
-        generate_branch_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','branch_count_1')
-        generate_branch_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 2','branch_count_2')
 
         sortedArrayImage = createSortedCellImageArray('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1')
         cellpics = []
@@ -80,6 +78,8 @@ def show_results():
         for cellpic in sortedArrayImage:
              cellpics.append(generateMejerinRedLabel(cellpic))
         createPlainCellGiffromObject(cellpics,'SHSY5Y Rep 2')
+        generate_branch_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','branch_count_1')
+        generate_branch_plot('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','branch_count_2')
        
        
         return render_template('results.html')

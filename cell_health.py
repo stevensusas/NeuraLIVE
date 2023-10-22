@@ -66,18 +66,18 @@ def generate_graphs(graphpath,graphname):
             health_rate[image_culture_number-1].append(health)
 
     # plot results for each culture
-    plt.scatter(range(0, len(circle_results[0])), circle_results[0], marker='o', s=30, c='r', label='Culture 1 Circle')
-    plt.scatter(range(0, len(ellipse_results[0])), ellipse_results[0], marker='^', s=30, c='r', label='Culture 1 Ellipse')
-    plt.scatter(range(0, len(circle_results[1])), circle_results[1], marker='o', s=30, c='g', label='Culture 2 Circle')
-    plt.scatter(range(0, len(ellipse_results[1])), ellipse_results[1], marker='^', s=30, c='g', label='Culture 2 Ellipse')
-    plt.scatter(range(0, len(circle_results[2])), circle_results[2], marker='o', s=30, c='b', label='Culture 3 Circle')
-    plt.scatter(range(0, len(ellipse_results[2])), ellipse_results[2], marker='^', s=30, c='b', label='Culture 3 Ellipse')
-    plt.scatter(range(0, len(circle_results[3])), circle_results[3], marker='o', s=30, c='y', label='Culture 4 Circle')
-    plt.scatter(range(0, len(ellipse_results[3])), ellipse_results[3], marker='^', s=30, c='y', label='Culture 4 Ellipse')
+    plt.scatter(range(0, len(circle_results[0])), circle_results[0], marker='o', s=30, c='r', label='Rep 1 Unadhered Cells')
+    plt.scatter(range(0, len(ellipse_results[0])), ellipse_results[0], marker='^', s=30, c='r', label='Rep 1 Adhered Cells')
+    plt.scatter(range(0, len(circle_results[1])), circle_results[1], marker='o', s=30, c='g', label='Rep 2 Unadhered Cells')
+    plt.scatter(range(0, len(ellipse_results[1])), ellipse_results[1], marker='^', s=30, c='g', label='Rep 2 Adhered Cells')
+    plt.scatter(range(0, len(circle_results[2])), circle_results[2], marker='o', s=30, c='b', label='Rep 3 Unadhered Cells')
+    plt.scatter(range(0, len(ellipse_results[2])), ellipse_results[2], marker='^', s=30, c='b', label='Rep 3 Adhered Cells')
+    plt.scatter(range(0, len(circle_results[3])), circle_results[3], marker='o', s=30, c='y', label='Rep 4 Unadhered Cells')
+    plt.scatter(range(0, len(ellipse_results[3])), ellipse_results[3], marker='^', s=30, c='y', label='Rep 4 Adhered Cells')
 
     plt.xlabel('Time')
-    plt.ylabel('Number of Two Types of Cells')
-    plt.title('Cell Types')
+    plt.ylabel('Counts of Adhered & Unadhered Cells')
+    plt.title('Cell Adherence')
     plt.grid(True)
     plt.legend()
     graph_filename = 'static/' + graphname + 'types.png'
@@ -86,18 +86,18 @@ def generate_graphs(graphpath,graphname):
 
     # plot cell health rate for each culture
 
-    plt.plot(range(0, len(health_rate[0])), health_rate[0], c='r', label='Culture 1')
-    plt.plot(range(0, len(health_rate[1])), health_rate[1], c='g', label='Culture 2')
-    plt.plot(range(0, len(health_rate[2])), health_rate[2], c='b', label='Culture 3')
-    plt.plot(range(0, len(health_rate[3])), health_rate[3], c='y', label='Culture 4')
+    plt.plot(range(0, len(health_rate[0])), health_rate[0], c='r', label='Rep 1')
+    plt.plot(range(0, len(health_rate[1])), health_rate[1], c='g', label='Rep 2')
+    plt.plot(range(0, len(health_rate[2])), health_rate[2], c='b', label='Rep 3')
+    plt.plot(range(0, len(health_rate[3])), health_rate[3], c='y', label='Rep 4')
 
     plt.xlabel('Time')
-    plt.ylabel('Cell Health Rate')
-    plt.title('Cell Health Rate')
+    plt.ylabel('Percentage of Healthy Cells')
+    plt.title('Cell Health')
     plt.grid(True)
     plt.legend()
     graph_filename = 'static/' + graphname + 'rate.png'
     plt.savefig(graph_filename)
     plt.close()
 
-generate_graphs('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','1')
+# generate_graphs('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','1')
