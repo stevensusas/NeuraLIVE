@@ -100,4 +100,4 @@ def generate_graphs(graphpath,graphname):
     plt.savefig(graph_filename)
     plt.close()
 
-generate_graphs('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','1')
+# generate_graphs('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','1')

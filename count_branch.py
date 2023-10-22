@@ -57,11 +57,11 @@ def generate_branch_plot(graphpath, image_name):
 
 
 
-    plt.scatter(range(1, len(results[0]) + 1), results[0], marker='o', s=30, c='b', label='Culture 1')
-    plt.scatter(range(1, len(results[1]) + 1), results[1], marker='o', s=30, c='r', label='Culture 2')
-    plt.scatter(range(1, len(results[2]) + 1), results[2], marker='o', s=30, c='g', label='Culture 3')
-    plt.scatter(range(1, len(results[3]) + 1), results[3], marker='o', s=30, c='c', label='Culture 4')
-    plt.xlabel('Image Order')
+    plt.scatter(range(1, len(results[0]) + 1), results[0], marker='o', s=30, c='b', label='Rep 1')
+    plt.scatter(range(1, len(results[1]) + 1), results[1], marker='o', s=30, c='r', label='Rep 2')
+    plt.scatter(range(1, len(results[2]) + 1), results[2], marker='o', s=30, c='g', label='Rep 3')
+    plt.scatter(range(1, len(results[3]) + 1), results[3], marker='o', s=30, c='c', label='Rep 4')
+    plt.xlabel('Time')
     plt.ylabel('Number of red pixels')
     plt.title('Cell Branches')
     plt.grid(True)
