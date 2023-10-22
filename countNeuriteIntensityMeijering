@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 
+
 # Default values for lowerbound = 2/255, upperbound = 0.05"
 #Output the neuritness of the cell image and images of the cells, the Meijering transformed image, 
 # and image quantifying neuriteness
@@ -25,7 +26,6 @@ def countNeuriteIntensityMeijering(pathToFile, lowerbound, upperbound):
 
 
     red_mask = cv2.inRange(image_m, lower_red, upper_red)
-
 
     red_pixel_count = cv2.countNonZero(red_mask)
 
@@ -51,8 +51,5 @@ def countNeuriteIntensityMeijering(pathToFile, lowerbound, upperbound):
 
     plt.show()
 
-    return red_pixel_count
 
 countNeuriteIntensityMeijering('/Users/stevensu/Downloads/images/livecell_train_val_images/MCF7_Phase_G4_2_03d16h00m_4.tif', 2/255, 0.05)
-
-
