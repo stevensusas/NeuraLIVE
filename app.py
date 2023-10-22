@@ -5,7 +5,8 @@ from werkzeug.utils import secure_filename
 from tempfile import TemporaryDirectory
 import matplotlib.pyplot as plt
 from cell_count import generate_plot
-from cell_health import generate_graphs  # Import your generate_plot function here
+from cell_health import generate_graphs
+from conversiontoGifMeijeringLabeled import createPlainCellGiffromObject, createSortedCellImageArray, generateMejerinRedLabel  # Import your generate_plot function here
 from count_branch import generate_branch_plot
 
 app = Flask(__name__)
@@ -60,16 +61,26 @@ def upload():
 
 @app.route('/results')
 def show_results():
-        print(1)
 
         generate_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','cell_count_1')
         generate_plot('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','cell_count_2')
         generate_graphs('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','1')
         generate_graphs('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2','2')
-        #generate_branch_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','branch_count_1')
-        #generate_branch_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 2','branch_count_2')
+        generate_branch_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1','branch_count_1')
+        generate_branch_plot('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 2','branch_count_2')
+
+        sortedArrayImage = createSortedCellImageArray('extracted_files/SHSY5Y_Rep_1/SHSY5Y Rep 1')
+        cellpics = []
+        for cellpic in sortedArrayImage:
+             cellpics.append(generateMejerinRedLabel(cellpic))
+        createPlainCellGiffromObject(cellpics,'SHSY5Y Rep 1')
+
+        sortedArrayImage = createSortedCellImageArray('extracted_files/SHSY5Y_Rep_2/SHSY5Y Rep 2')
+        cellpics = []
+        for cellpic in sortedArrayImage:
+             cellpics.append(generateMejerinRedLabel(cellpic))
+        createPlainCellGiffromObject(cellpics,'SHSY5Y Rep 2')
        
-        # Create a unique graph filename
        
         return render_template('results.html')
 

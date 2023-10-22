@@ -1,31 +1,31 @@
-import glob
-from PIL import Image
-import imageio
-import imagecodecs
-
-#Create a sorted cell image array from 
-def createSortedCellImageArray(path):
-    image_files = glob.glob(path)
-    image_numbers = [int(''.join(filter(lambda x: x in '0123456789', image_file.split('_')[5]))) for image_file in image_files]
-# Sort the image files based on the image number
-    sorted_image_files = [x for _, x in sorted(zip(image_numbers, image_files))]
-    return sorted_image_files
-
-#takes an array of sorted .tif images as the input
-def createPlainCellGif(sorted_image_files):
-    frame_duration = 200 
-        # Extract image numbers from filenames
-
-    images = []
-
-    for tif_image in sorted_image_files:
-        with imageio.get_reader(tif_image) as reader:
-            for frame in reader:
-                images.append(frame)
-
-    # Save the list of images as a GIF at a given location
-    imageio.mimsave('/Users/stevensu/Desktop/HackHarvard/GIF.gif', images, duration=frame_duration / 1000.0)
+# import glob
+# from PIL import Image
+# import imageio
 
 
-sortedArrayImage = createSortedCellImageArray('./SHSY5Y_Rep1/*.tif')
-createPlainCellGif(sortedArrayImage)
+# #Create a sorted cell image array from 
+# def createSortedCellImageArray(path):
+#     image_files = glob.glob(path)
+#     image_numbers = [int(''.join(filter(lambda x: x in '0123456789', image_file.split('_')[5]))) for image_file in image_files]
+# # Sort the image files based on the image number
+#     sorted_image_files = [x for _, x in sorted(zip(image_numbers, image_files))]
+#     return sorted_image_files
+
+# #takes an array of sorted .tif images as the input
+# def createPlainCellGif(sorted_image_files):
+#     frame_duration = 200 
+#         # Extract image numbers from filenames
+
+#     images = []
+
+#     for tif_image in sorted_image_files:
+#         with imageio.get_reader(tif_image) as reader:
+#             for frame in reader:
+#                 images.append(frame)
+
+#     # Save the list of images as a GIF at a given location
+#     imageio.mimsave('/Users/stevensu/Desktop/HackHarvard/GIF.gif', images, duration=frame_duration / 1000.0)
+
+
+# sortedArrayImage = createSortedCellImageArray('./SHSY5Y_Rep1/*.tif')
+# createPlainCellGif(sortedArrayImage)

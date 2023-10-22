@@ -5,8 +5,7 @@ import numpy as np
 import glob
 from PIL import Image
 import imageio
-import imagecodecs
-
+import os
 
 def generateMejerinRedLabel(inputimage):
     image =  cv2.imread(inputimage)
@@ -26,14 +25,14 @@ def generateMejerinRedLabel(inputimage):
     return image_m
 
 def createSortedCellImageArray(path):
-    image_files = glob.glob(path)
-    image_numbers = [int(''.join(filter(lambda x: x in '0123456789', image_file.split('_')[5]))) for image_file in image_files]
+    image_files = glob.glob(os.path.join(path,'*.tif'))
+    image_numbers = [int(''.join(filter(lambda x: x in '0123456789', image_file.split('_')[7]))) for image_file in image_files]
 # Sort the image files based on the image number
     sorted_image_files = [x for _, x in sorted(zip(image_numbers, image_files))]
     return sorted_image_files
 
 #takes an array of sorted .tif images as the input
-def createPlainCellGiffromObject(sorted_image_object):
+def createPlainCellGiffromObject(sorted_image_object,id):
     frame_duration = 200 
         # Extract image numbers from filenames
 
@@ -42,18 +41,7 @@ def createPlainCellGiffromObject(sorted_image_object):
     for x in sorted_image_object:
         images.append(x)
 
+    
     # Save the list of images as a GIF at a given location
-    imageio.mimsave('/Users/stevensu/Desktop/HackHarvard/GIFlabelled.gif', images, duration=frame_duration / 1000.0)
+    imageio.mimsave('static/GIFlabelled'+id+'.gif', images, duration=frame_duration / 1000.0)
 
-
-def main():
-    sortedArrayImage = createSortedCellImageArray('./SHSY5Y_Rep1/*.tif')
-    cellpics = []
-    for cellpic in sortedArrayImage:
-        cellpics.append(generateMejerinRedLabel(cellpic))
-
-    createPlainCellGiffromObject(cellpics)
-
-    print("End of File")
-
-main()
