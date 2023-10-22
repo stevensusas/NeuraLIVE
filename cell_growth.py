@@ -40,9 +40,9 @@ for image_file in sorted_image_files:
 # Sort the results and image_numbers based on the number of cells (from least to most)
 
 plt.scatter(range(1, len(sorted_image_files) + 1), results, marker='o', s=30, c='b', label='Data Points')
-plt.xlabel('Image Order')
-plt.ylabel('Number of Cells')
-plt.title('Cell Growth')
+plt.xlabel('Time')
+plt.ylabel('Cell Growth Index')
+plt.title('Cell Growth Index By Time')
 plt.grid(True)
 plt.legend()
 plt.show()

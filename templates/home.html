@@ -16,9 +16,15 @@
         }
         .logo {
             color: white;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .team {
+            color: white;
             font-size: 24px;
             font-weight: bold;
         }
+
         .background-image {
             position: absolute;
             top: 0;
@@ -77,19 +83,25 @@
         }
     </style>
 </head>
-<body>
-    <div class="header">
-        <div class="logo"> CellCS </div>
-    </div>
+<body>  
     <div class="background-image"></div>
-    <div class="container">
-        <div class="upload-form">
-            <h1>Upload ZIP Files</h1>
-            <form method="POST" action="/upload" enctype="multipart/form-data">
-                <input type="file" name="zip_file1" accept=".zip" required>
-                <input type="file" name="zip_file2" accept=".zip" required>
-                <button type="submit">Upload</button>
-            </form>
+        <div class="container">
+            <div class="header">
+                <div class="logo"> NeuraLink </div>
+            </div>
+            <div class="upload-form">
+                <h1>Upload ZIP Files</h1>
+                <form method="POST" action="/upload" enctype="multipart/form-data">
+                    <input type="file" name="zip_file1" accept=".zip" required>
+                    <input type="file" name="zip_file2" accept=".zip" required>
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <body>
+                this is our project.
+            </body>
         </div>
     </div>
 </body>

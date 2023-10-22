@@ -53,9 +53,9 @@ def generate_plot (imagespath,imagename):
    
     # Create a scatter plot
     plt.scatter(range(1, len(sorted_image_files) + 1), results, marker='o', s=30, c='b', label='Data Points')
-    plt.xlabel('Image Order')
-    plt.ylabel('Number of Cells (Based on Shape)')
-    plt.title('Cell Growth (Based on Cell Shape)')
+    plt.xlabel('Time')
+    plt.ylabel('Number of Cells)')
+    plt.title('Cell Growth')
     plt.grid(True)
     plt.legend()
 
