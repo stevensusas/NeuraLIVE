@@ -26,7 +26,8 @@ import os
 
 
 
-def count_branches(image):
+def count_branches(image_file):
+    image = cv2.imread(image_file, cv2.IMREAD_COLOR)
     greyscale = cv2. cvtColor(image, cv2.COLOR_BGR2GRAY)
     dns_greyscale = cv2.fastNlMeansDenoising(greyscale)
     filtered_image  = meijering(dns_greyscale, [1], black_ridges = True)
@@ -34,7 +35,7 @@ def count_branches(image):
     return np.sum((filtered_image > 5/255) & (filtered_image < 0.045))
 
 
-def generate_branch_plot(graphpath, image_names):
+def generate_branch_plot(graphpath, image_name):
     # Process the images
     image_files = glob.glob(os.path.join(graphpath,'*.tif'))
     # image_files = glob.glob('./SHSY5Y_Rep1/*.tif')
@@ -43,16 +44,14 @@ def generate_branch_plot(graphpath, image_names):
     # Extract image numbers from filenames
     #image_numbers = [int(''.join(filter(lambda x: x in '0123456789', image_file.split('_')[5]))) for image_file in image_files]
     #image_culture_numbers = [int(''.join(filter(lambda x: x in '0123456789', image_file.split('_')[6]))) for image_file in image_files]
-    
     image_numbers = [int(''.join(filter(lambda x: x in '0123456789', image_file.split('_')[7]))) for image_file in image_files]
     image_culture_numbers = [int(''.join(filter(lambda x: x in '0123456789', image_file.split('_')[8]))) for image_file in image_files]
+    
     # Sort the image files based on the image number
     sorted_image_files = [x for _, x in sorted(zip(image_numbers, zip(image_files, image_culture_numbers)))]
-    print(sorted_image_files)
 
     for image_file, image_culture_number in sorted_image_files:
-        image = cv2.imread(image_file, cv2.IMREAD_COLOR)
-        num_branches = count_branches(image)
+        num_branches = count_branches(image_file)
         if (image_culture_number in [1, 2, 3, 4]):
             results[image_culture_number-1].append(num_branches)
 
@@ -67,6 +66,7 @@ def generate_branch_plot(graphpath, image_names):
     plt.title('Cell Branches')
     plt.grid(True)
     plt.legend()
-    graph_filename = 'static/' + image_names + 'types.png'
+    graph_filename = 'static/' + image_name + 'types.png'
     plt.savefig(graph_filename)
     plt.show()
+    plt.close()
