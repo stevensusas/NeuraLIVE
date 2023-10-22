@@ -14,7 +14,6 @@ def countNeuriteIntensityMeijering(pathToFile, lowerbound, upperbound):
 
     greyscale_m = cv2. cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-
     dns_greyscale_m = cv2.fastNlMeansDenoising(greyscale_m)
 
     meijering_filtered_image  = meijering(dns_greyscale_m, [1], black_ridges = True)
@@ -23,7 +22,6 @@ def countNeuriteIntensityMeijering(pathToFile, lowerbound, upperbound):
 
     lower_red = np.array([255, 0, 0])
     upper_red = np.array([255, 0, 0])
-
 
     red_mask = cv2.inRange(image_m, lower_red, upper_red)
 
@@ -50,6 +48,5 @@ def countNeuriteIntensityMeijering(pathToFile, lowerbound, upperbound):
     plt.axis('off')
 
     plt.show()
-
 
 countNeuriteIntensityMeijering('/Users/stevensu/Downloads/images/livecell_train_val_images/MCF7_Phase_G4_2_03d16h00m_4.tif', 2/255, 0.05)
